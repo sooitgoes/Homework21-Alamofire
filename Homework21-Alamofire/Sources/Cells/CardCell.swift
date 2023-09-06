@@ -36,7 +36,7 @@ class CardCell: UITableViewCell {
         return stack
     }()
 
-    private lazy var image: UIImageView = {
+    private lazy var imageCard: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class CardCell: UITableViewCell {
         stackLabel.addArrangedSubview(nameLabel)
         stackLabel.addArrangedSubview(cmcLabel)
         stackLabel.addArrangedSubview(idLabel)
-        contentView.addSubViews(views: [stackLabel, image])
+        contentView.addSubViews(views: [stackLabel, imageCard])
     }
 
     private func setupLayout() {
@@ -68,10 +68,10 @@ class CardCell: UITableViewCell {
             stackLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
             stackLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
 
-            image.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            image.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15),
-            image.heightAnchor.constraint(equalToConstant: 75),
-            image.widthAnchor.constraint(equalToConstant: 55)
+            imageCard.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            imageCard.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15),
+            imageCard.heightAnchor.constraint(equalToConstant: 75),
+            imageCard.widthAnchor.constraint(equalToConstant: 55)
         ])
         stackLabel.setCustomSpacing(5, after: nameLabel)
     }
