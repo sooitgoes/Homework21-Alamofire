@@ -76,11 +76,14 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
-
-
 }
 
 extension MainViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = DetailViewController()
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewController.detailsOfCard = allCards[indexPath.row]
+        present(viewController, animated: true)
+    }
 }
 
