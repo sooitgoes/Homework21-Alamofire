@@ -12,6 +12,8 @@
 		D12A64FC2AA878AB00C809EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A64FB2AA878AB00C809EF /* ViewController.swift */; };
 		D12A65012AA878AB00C809EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D12A65002AA878AB00C809EF /* Assets.xcassets */; };
 		D12A65042AA878AB00C809EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D12A65022AA878AB00C809EF /* LaunchScreen.storyboard */; };
+		D12A65102AA87FF400C809EF /* ModelForCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A650F2AA87FF400C809EF /* ModelForCards.swift */; };
+		D12A65142AA880F900C809EF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D12A65132AA880F900C809EF /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		D12A65002AA878AB00C809EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D12A65032AA878AB00C809EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D12A65052AA878AB00C809EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D12A650F2AA87FF400C809EF /* ModelForCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12A65142AA880F900C809EF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,8 +96,17 @@
 			isa = PBXGroup;
 			children = (
 				D12A64FB2AA878AB00C809EF /* ViewController.swift */,
+				D12A65112AA87FFB00C809EF /* Model */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		D12A65112AA87FFB00C809EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D12A650F2AA87FF400C809EF /* ModelForCards.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +125,9 @@
 			dependencies = (
 			);
 			name = "Homework21-Alamofire";
+			packageProductDependencies = (
+				D12A65132AA880F900C809EF /* Alamofire */,
+			);
 			productName = "Homework21-Alamofire";
 			productReference = D12A64F42AA878AB00C809EF /* Homework21-Alamofire.app */;
 			productType = "com.apple.product-type.application";
@@ -140,6 +156,9 @@
 				Base,
 			);
 			mainGroup = D12A64EB2AA878AB00C809EF;
+			packageReferences = (
+				D12A65122AA880F900C809EF /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = D12A64F52AA878AB00C809EF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -169,6 +188,7 @@
 				D12A64FC2AA878AB00C809EF /* ViewController.swift in Sources */,
 				D12A64F82AA878AB00C809EF /* AppDelegate.swift in Sources */,
 				D12A64FA2AA878AB00C809EF /* SceneDelegate.swift in Sources */,
+				D12A65102AA87FF400C809EF /* ModelForCards.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +398,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D12A65122AA880F900C809EF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D12A65132AA880F900C809EF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D12A65122AA880F900C809EF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D12A64EC2AA878AB00C809EF /* Project object */;
 }
