@@ -8,6 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    let networkManager = NetworkManager()
     var allCards = [DataCards]()
 
     // MARK: - Ui Elements
@@ -23,6 +24,7 @@ class MainViewController: UIViewController {
         setupNavigationBar()
         registerTableCell()
         viewConfiguration()
+        fetchCards()
     }
 
     // MARK: - Configuration
@@ -42,6 +44,18 @@ class MainViewController: UIViewController {
         mainView.tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
     }
 
+    private func fetchCards() {
+        networkManager.fetchCards(url: networkManager.urlCards) { [weak self] result in
+            switch result {
+            case .success(let cards):
+                self?.allCards = cards.cards
+                self?.mainView.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     // MARK: - Action
 
 }
@@ -53,10 +67,14 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.identifier, for: indexPath) as? CardCell else { return UITableViewCell() }
-//        let cardCell = allCards[indexPath.row]
-//        cell.cards = cardCell
+        let cardCell = allCards[indexPath.row]
+        cell.cards = cardCell
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
     }
 
 

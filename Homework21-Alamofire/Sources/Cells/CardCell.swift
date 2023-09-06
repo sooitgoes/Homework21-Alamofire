@@ -9,6 +9,25 @@ import UIKit
 
 class CardCell: UITableViewCell {
     static let identifier = "cardCell"
+    let networkManager = NetworkManager()
+
+    var cards: DataCards? {
+        didSet {
+            nameLabel.text = cards?.name
+            cmcLabel.text = "CMC -> \(cards?.cmc ?? 0)"
+            idLabel.text = "ID -> \(cards?.id ?? "")"
+
+            guard let imagePath = cards?.imageUrl,
+                  let urlImage = URL(string: imagePath)
+            else {
+                imageCard.image = UIImage(named: "404")
+                return
+            }
+            networkManager.fetchImageForCell(urlImage: urlImage) { data in
+                self.imageCard.image = UIImage(data: data)
+            }
+        }
+    }
 
     // MARK: - UI Elements
     private lazy var nameLabel: UILabel = {
@@ -74,5 +93,11 @@ class CardCell: UITableViewCell {
             imageCard.widthAnchor.constraint(equalToConstant: 55)
         ])
         stackLabel.setCustomSpacing(5, after: nameLabel)
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.accessoryType = .none
+        self.cards = nil
     }
 }
