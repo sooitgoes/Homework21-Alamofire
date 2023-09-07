@@ -28,7 +28,6 @@ class MainViewController: UIViewController {
     }
 
     // MARK: - Configuration
-
     private func setupNavigationBar() {
         title = "Magic: The Gathering"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -37,7 +36,7 @@ class MainViewController: UIViewController {
     private func viewConfiguration() {
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
-
+        mainView.searchButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
 
     private func registerTableCell() {
@@ -57,9 +56,36 @@ class MainViewController: UIViewController {
     }
 
     // MARK: - Action
+    @objc func buttonPressed() {
+            // Первый вариант
 
+//        networkManager.fetchCardsByName(name: mainView.textField.text ?? "") { [weak self] result in
+//            switch result {
+//            case .success(let card):
+//                self?.allCards.append(card)
+//                self?.mainView.tableView.reloadData()
+//            case .failure(_):
+//                self?.showAlert(title: "Not found: 404", message: "Please try again.")
+//            }
+//        }
+
+          // Второй вариант
+        mainView.nameTextField.text?.isEmpty == true ?
+        showAlert(title: "Empty field", message: "Please enter the name of the card.")
+        :
+        networkManager.fetchCardsByName(name: mainView.nameTextField.text ?? "") { [weak self] result in
+            switch result {
+            case .success(let card):
+                self?.allCards.append(card)
+                self?.mainView.tableView.reloadData()
+            case .failure(_):
+                self?.showAlert(title: "Not found: 404", message: "Please try again.")
+            }
+        }
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         allCards.count
@@ -78,6 +104,7 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = DetailViewController()
@@ -86,4 +113,14 @@ extension MainViewController: UITableViewDelegate {
         present(viewController, animated: true)
     }
 }
+
+// MARK: - Alert
+extension MainViewController {
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+}
+
 

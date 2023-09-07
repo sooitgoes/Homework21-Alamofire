@@ -23,8 +23,8 @@ class CardCell: UITableViewCell {
                 imageCard.image = UIImage(named: "404")
                 return
             }
-            networkManager.fetchImageForCell(urlImage: urlImage) { data in
-                self.imageCard.image = UIImage(data: data)
+            networkManager.fetchImageForCell(urlImage: urlImage) { [weak self] data in
+                self?.imageCard.image = UIImage(data: data)
             }
         }
     }

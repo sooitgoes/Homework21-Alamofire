@@ -12,41 +12,39 @@ class MainView: UIView {
     // MARK: - UI Elements
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.backgroundColor = .systemGray
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
 
-    lazy var button: UIButton = {
+    lazy var searchButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Type", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
+        button.setTitle("Search", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
-    lazy var textField: UITextField = {
+    lazy var nameTextField: UITextField = {
         let txfld = UITextField()
-        txfld.placeholder = "type your text"
+        txfld.placeholder = "Type name"
         txfld.clipsToBounds = true
         txfld.layer.cornerRadius = 20
-        txfld.backgroundColor = .lightGray
-        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 20))
-        txfld.leftView = paddingView
-        txfld.leftViewMode = .always
+        txfld.backgroundColor = .white
+        txfld.textAlignment = .center
         txfld.translatesAutoresizingMaskIntoConstraints = false
         return txfld
     }()
-
 
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupHierarchy()
         setupLayout()
-        backgroundColor = .white
+        backgroundColor = .systemGray
     }
 
     required init?(coder: NSCoder) {
@@ -55,22 +53,22 @@ class MainView: UIView {
 
     // MARK: - Setup
     private func setupHierarchy() {
-        addSubViews(views: [textField, button, tableView])
+        addSubViews(views: [nameTextField, searchButton, tableView])
     }
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            textField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            textField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            textField.widthAnchor.constraint(equalToConstant: 200),
-            textField.heightAnchor.constraint(equalToConstant: 44),
+            nameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+            nameTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            nameTextField.widthAnchor.constraint(equalToConstant: 250),
+            nameTextField.heightAnchor.constraint(equalToConstant: 44),
 
-            button.centerXAnchor.constraint(equalTo: centerXAnchor),
-            button.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20),
-            button.widthAnchor.constraint(equalToConstant: 200),
-            button.heightAnchor.constraint(equalToConstant: 44),
+            searchButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            searchButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 20),
+            searchButton.widthAnchor.constraint(equalToConstant: 200),
+            searchButton.heightAnchor.constraint(equalToConstant: 44),
 
-            tableView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10),
+            tableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 10),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             tableView.rightAnchor.constraint(equalTo: rightAnchor),
             tableView.leftAnchor.constraint(equalTo: leftAnchor)

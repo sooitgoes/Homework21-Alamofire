@@ -30,7 +30,7 @@ class DetailView: UIView {
         super.init(frame: frame)
         setupHierarchy()
         setupLayout()
-        backgroundColor = .cyan
+        backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
@@ -41,17 +41,16 @@ class DetailView: UIView {
     private func setupHierarchy() {
         addSubViews(views: [nameLabel, descriptionLabel])
     }
-
+    
     private func setupLayout() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-
+            
             descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
             descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20)
-
         ])
     }
 }

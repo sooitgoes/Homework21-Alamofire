@@ -31,4 +31,38 @@ class NetworkManager {
             completion(imageData)
         }
     }
+
+// MARK: - Первый вариант задания со *
+//    func fetchCardsByName(name: String, completion: @escaping (Result<DataCards, Error>) -> Void) {
+//        let request = AF.request("https://api.magicthegathering.io/v1/cards?name=\(name)")
+//        request.responseDecodable(of: Cards.self) { data in
+//            switch data.result {
+//            case .success(let cards):
+//                cards.cards.forEach { element in
+//                    completion(.success(element))
+//                }
+//            case .failure(let jsonError):
+//                completion(.failure(jsonError))
+//            }
+//        }
+//    }
+
+    // MARK: - Второй вариант задания со *
+    func fetchCardsByName(name: String, completion: @escaping (Result<DataCards, Error>) -> Void) {
+        let request = AF.request(urlCards)
+        request.responseDecodable(of: Cards.self) { data in
+            switch data.result {
+            case .success(let cards):
+                cards.cards.forEach { element in
+                    if element.name == name {
+                        completion(.success(element))
+                    }
+                }
+            case .failure(let jsonError):
+                completion(.failure(jsonError))
+            }
+        }
+    }
 }
+
+
