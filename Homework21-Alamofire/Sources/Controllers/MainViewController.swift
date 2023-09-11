@@ -76,7 +76,7 @@ class MainViewController: UIViewController {
         networkManager.fetchCardsByName(name: mainView.nameTextField.text ?? "") { [weak self] result in
             switch result {
             case .success(let card):
-                self?.allCards.append(card)
+                self?.allCards = card
                 self?.mainView.tableView.reloadData()
             case .failure(_):
                 self?.showAlert(title: "Not found: 404", message: "Please try again.")

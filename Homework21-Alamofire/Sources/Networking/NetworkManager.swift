@@ -48,14 +48,16 @@ class NetworkManager {
 //    }
 
     // MARK: - Второй вариант задания со *
-    func fetchCardsByName(name: String, completion: @escaping (Result<DataCards, Error>) -> Void) {
+    func fetchCardsByName(name: String, completion: @escaping (Result<[DataCards], Error>) -> Void) {
         let request = AF.request(urlCards)
         request.responseDecodable(of: Cards.self) { data in
             switch data.result {
             case .success(let cards):
+                var searchCards = [DataCards]()
                 cards.cards.forEach { element in
                     if element.name == name {
-                        completion(.success(element))
+                        searchCards.append(element)
+                        completion(.success(searchCards))
                     }
                 }
             case .failure(let jsonError):
